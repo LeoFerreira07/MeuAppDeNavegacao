@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const saveState = async (state) => {
+    try { 
+      await AsyncStorage.setItem('loggedIn', "true");
+    } catch (error){
+      console.log('Erro ao salvar o estado de login: ');
+    }
+  }
+
   const handleLogin = () => {
     if (username === 'admin' && password === '1234') {
       navigation.replace('Home'); 
+      saveState(state)
     } else {
       Alert.alert('Erro', 'Usuário ou senha inválidos');
     }
   };
+
 
   return (
     <View style={styles.container}>
