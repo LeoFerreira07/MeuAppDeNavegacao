@@ -13,11 +13,10 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(null);
 
-  // Verifica o estado de login ao iniciar o app
   React.useEffect(() => {
     const checkLoginStatus = async () => {
       const loggedIn = await AsyncStorage.getItem('loggedIn');
-      setIsLoggedIn(loggedIn === 'true'); // Define o estado com base no valor armazenado
+      setIsLoggedIn(loggedIn === 'true'); 
     };
     checkLoginStatus();
   }, []);
